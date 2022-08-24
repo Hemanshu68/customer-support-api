@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { TicketRepository } from 'src/repository/ticket.repository';
-import { Ticket } from '../entities/ticket.entity';
+import { TicketRepository } from 'src/modules/ticket/ticket.repository';
+import { Ticket } from './ticket.entity';
 
 @Injectable()
 export class TicketService {

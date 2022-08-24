@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { SETTINGS } from 'src/app.utils';
-import { UserRegistrationDto } from 'src/dto/user.req.dto';
-import { UserService } from 'src/services/user.service';
+import { UserRegistrationDto } from 'src/modules/user/user.req.dto';
+import { UserService } from 'src/modules/user/user.service';
 
 @Controller('user')
 export class UserController {
@@ -17,5 +17,11 @@ export class UserController {
     @Get('/all')
     async getAllUser() {
         return await this.userService.findAll();
+    }
+
+    @Get('/getuser')
+    async getUser(@Body() req: any) {
+        const { email, password } = req;
+        return await this.userService.getUserByEmail(email);
     }
 }

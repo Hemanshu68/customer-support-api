@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserRegistrationDto } from 'src/dto/user.req.dto';
-import { User } from 'src/entities/user.entity';
-import { UserRepository } from 'src/repository/user.repository';
+import { UserRegistrationDto } from 'src/modules/user/user.req.dto';
+import { User } from 'src/modules/user/user.entity';
+import { UserRepository } from 'src/modules/user/user.repository';
 
 @Injectable()
 export class UserService {
@@ -22,5 +22,15 @@ export class UserService {
     }
     async findAll() {
         return await this.userRepository.findAndCount();
+    }
+
+    async getUserByEmail(email: string): Promise<User | undefined> {
+        const user = await this.userRepository.findOne({
+            where: {
+                email,
+            },
+        });
+        console.log(user);
+        return user;
     }
 }

@@ -6,9 +6,9 @@ import {
     UsePipes,
     ValidationPipe,
 } from '@nestjs/common';
-import { CreateTicketDto } from '../dto/create-ticket.dto';
-import { Ticket } from '../entities/ticket.entity';
-import { TicketService } from '../services/ticket.service';
+import { CreateTicketDto } from './create-ticket.dto';
+import { Ticket } from './ticket.entity';
+import { TicketService } from './ticket.service';
 
 @Controller('ticket')
 export class TicketController {

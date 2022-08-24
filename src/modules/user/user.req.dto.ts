@@ -1,5 +1,5 @@
 import { IsEmail, IsNotEmpty, Length, Matches } from 'class-validator';
-import { UserRole } from 'src/entities/user.entity';
+import { UserRole } from 'src/modules/user/user.entity';
 import { MESSAGES, REGEX } from 'src/app.utils';
 
 export class UserRegistrationDto {

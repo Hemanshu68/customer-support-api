@@ -7,7 +7,6 @@ import {
     Entity,
     ObjectID,
     ObjectIdColumn,
-    UpdateDateColumn,
 } from 'typeorm';
 
 export enum IssueType {
@@ -16,11 +15,17 @@ export enum IssueType {
     OTHER = 'Other',
 }
 
+export interface RemarkInteface {
+    remark: string;
+    date: string;
+}
+
 @Entity('Ticket')
 export class Ticket extends BaseEntity {
     @ObjectIdColumn()
     id: ObjectID;
 
+    @IsNotEmpty()
     @Column()
     ticketId: number;
 
@@ -43,12 +48,24 @@ export class Ticket extends BaseEntity {
     })
     isActive: boolean = true;
 
+    @Column({
+        type: 'array',
+        default: [],
+    })
+    remarks: RemarkInteface[] = [];
+
     @Column({ default: IssueType.OTHER })
     issueType: IssueType;
 
     @CreateDateColumn({ name: 'created_at' })
     createdAt: Date;
 
-    @UpdateDateColumn({ name: 'updated_at' })
-    updatedAt: Date;
+    @BeforeInsert()
+    initialRemark() {
+        const iR = {
+            remark: 'Ticket Created!',
+            date: new Date().toDateString(),
+        };
+        this.remarks.push(iR);
+    }
 }

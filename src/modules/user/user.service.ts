@@ -17,7 +17,6 @@ export class UserService {
         user.email = data.email;
         user.role = data.role;
         user.password = data.password;
-        console.log(user);
         return await this.userRepository.save(user);
     }
     async findAll() {
@@ -30,7 +29,6 @@ export class UserService {
                 email,
             },
         });
-        console.log(user);
         return user;
     }
 }

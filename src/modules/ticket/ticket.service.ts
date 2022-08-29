@@ -17,4 +17,12 @@ export class TicketService {
     async getAll() {
         return await this.ticketRepository.findAndCount();
     }
+
+    async getTicketById(ticketId: number) {
+        return await this.ticketRepository.findOneBy({ where: { ticketId } });
+    }
+
+    async count() {
+        return await this.ticketRepository.count();
+    }
 }

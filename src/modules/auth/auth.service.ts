@@ -17,7 +17,8 @@ export class AuthService {
     async validateUserCreds(email: string, password: string): Promise<any> {
         const user = await this.userService.getUserByEmail(email);
 
-        if (!user) throw new BadRequestException({ message: 'No user Found' });
+        if (!user)
+            throw new BadRequestException({ message: 'Invalid Credetials' });
 
         if (!(await bcrypt.compare(password, user.password)))
             throw new UnauthorizedException({ message: 'Password incorrect' });

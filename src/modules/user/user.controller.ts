@@ -1,8 +1,10 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { SETTINGS } from 'src/app.utils';
 import { UserRegistrationDto } from 'src/modules/user/user.req.dto';
 import { UserService } from 'src/modules/user/user.service';
 
+@ApiTags('User')
 @Controller('user')
 export class UserController {
     constructor(private userService: UserService) {}
@@ -21,7 +23,7 @@ export class UserController {
 
     @Get('/getuser')
     async getUser(@Body() req: any) {
-        const { email, password } = req;
+        const { email } = req;
         return await this.userService.getUserByEmail(email);
     }
 }

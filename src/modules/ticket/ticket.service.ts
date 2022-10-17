@@ -25,4 +25,13 @@ export class TicketService {
     async count() {
         return await this.ticketRepository.count();
     }
+    async updateById(ticketId: number, data: any) {
+        return await this.ticketRepository.findOneAndUpdate(
+            { ticketId },
+            { $push: { remarks: data } },
+        );
+    }
+    async deletebyId(ticketId: number) {
+        return await this.ticketRepository.deleteOne({ ticketId });
+    }
 }
